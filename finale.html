@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Darling - Plumeria Garden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-script { font-family: 'Dancing Script', cursive; }
+        .confetti {
+            position: absolute;
+            top: 0;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: 1;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+<section id="finale" class="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-purple-900 via-pink-800 to-purple-900 px-1 xs:px-2 sm:px-4">
+    <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-30"></div>
+
+    <div class="text-center z-20 w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl mx-auto">
+        <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-script text-white mb-3 xs:mb-4 sm:mb-6 md:mb-8 animate-pulse-gentle">
+            One Final Surprise
+        </h1>
+
+        <p class="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white leading-relaxed font-light mb-4">
+            You've journeyed through our memories, our music, and our love. Now, there's one last gift waiting for you.
+        </p>
+
+        <button id="surpriseBtn" class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12 py-2 xs:py-3 sm:py-4 rounded-full text-sm xs:text-base sm:text-lg md:text-xl font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl animate-bounce-gentle">
+            Reveal Your Surprise
+        </button>
+
+        <div id="surpriseContent" class="hidden mt-6">
+            <div class="bg-white text-gray-900 rounded-lg p-4 xs:p-6 sm:p-8 shadow-lg max-w-xl mx-auto animate-fade-in-delay">
+                <div class="text-4xl mb-4">❤️</div>
+                <p class="text-lg xs:text-xl sm:text-2xl font-semibold mb-2">Happy Birthday, My Love!</p>
+                <p class="mb-2 text-sm xs:text-base sm:text-lg">May this day be as beautiful as you are. May this year bring you all the joy, success, and happiness you deserve. And may our love continue to grow stronger with each passing day.</p>
+                <p class="mb-4 text-sm xs:text-base sm:text-lg">I love you more than words can express, and I'm grateful for every moment we share.</p>
+                <button id="finalBtn" class="flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-semibold px-4 py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300">
+                    <svg width="24" height="24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    I Love You
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Make it a named function instead of IIFE for better control
+function initFinaleSection() {
+    // Wait for elements to be in DOM
+    const checkAndInit = () => {
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const surpriseContent = document.getElementById('surpriseContent');
+        const finalBtn = document.getElementById('finalBtn');
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        if (!surpriseBtn || !surpriseContent || !finalBtn || !confettiContainer) {
+            // Retry after a short delay if elements aren't ready
+            setTimeout(checkAndInit, 100);
+            return;
+        }
+
+        // Remove any existing event listeners to prevent duplicates
+        const newSurpriseBtn = surpriseBtn.cloneNode(true);
+        surpriseBtn.parentNode.replaceChild(newSurpriseBtn, surpriseBtn);
+        
+        const newFinalBtn = finalBtn.cloneNode(true);
+        finalBtn.parentNode.replaceChild(newFinalBtn, finalBtn);
+
+        // Add fresh event listeners
+        newSurpriseBtn.onclick = () => {
+            surpriseContent.classList.remove('hidden');
+            newSurpriseBtn.style.display = 'none';
+            createConfetti();
+        };
+
+        // Get the updated final button reference
+        const updatedFinalBtn = document.getElementById('finalBtn');
+        updatedFinalBtn.onclick = () => {
+            createConfetti();
+        };
+
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            const numberOfConfetti = 100;
+            
+            for (let i = 0; i < numberOfConfetti; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                const posX = Math.random() * 100;
+                confetti.style.left = `${posX}%`;
+                
+                const size = Math.random() * 8 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                const colors = ['#F7E7CE', '#FEF9F3', '#FFD700', '#FFC0CB', '#FFFFFF'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.backgroundColor = randomColor;
+                
+                const shapes = ['circle', 'square', 'triangle'];
+                const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+                if (randomShape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                } else if (randomShape === 'triangle') {
+                    confetti.style.width = '0';
+                    confetti.style.height = '0';
+                    confetti.style.backgroundColor = 'transparent';
+                    confetti.style.borderLeft = `${size}px solid transparent`;
+                    confetti.style.borderRight = `${size}px solid transparent`;
+                    confetti.style.borderBottom = `${size * 1.5}px solid ${randomColor}`;
+                }
+                
+                const rotation = Math.random() * 360;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+                
+                const duration = Math.random() * 3 + 2;
+                confetti.style.animationDuration = `${duration}s`;
+                
+                const delay = Math.random() * 2;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(confetti);
+            }
+        }
+
+        console.log('Finale section initialized successfully');
+    };
+
+    checkAndInit();
+}
+
+// For backward compatibility, also run immediately if called directly
+if (document.getElementById('surpriseBtn')) {
+    initFinaleSection();
+}
+
+// Make function globally available
+window.initFinaleSection = initFinaleSection;
+</script>
+</body>
+</html>

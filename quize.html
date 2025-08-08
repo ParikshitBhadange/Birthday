@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How Deep Runs My Love? - Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .font-script {
+      font-family: 'Dancing Script', cursive;
+    }
+    .animate-bounce-gentle {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .animate-fade-in-delay {
+      animation: fadeIn 1s ease-in 0.4s forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .animate-scale-in {
+      animation: scaleIn 0.4s ease-out;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen flex items-center justify-center px-4">
+
+<section id="quiz" class="min-h-screen py-8 xs:py-12 sm:py-16 md:py-20 px-1 xs:px-2 sm:px-4 bg-gradient-to-br from-pink-50 to-purple-50">
+  <div class="w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl mx-auto">
+    <h2 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-script text-center text-purple-600 mb-1 xs:mb-2 sm:mb-4 animate-bounce-gentle">How Deep Runs My Love?</h2>
+    <p class="text-sm xs:text-base sm:text-lg md:text-xl text-center text-teal-600 mb-4 xs:mb-6 sm:mb-8 md:mb-12 px-1 xs:px-2 sm:px-4 animate-fade-in-delay">
+      Let's see how well you know my heart
+    </p>
+
+    <div class="bg-white/90 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 border xs:border-2 border-purple-200 animate-scale-in">
+      <div id="quiz-container"></div>
+      <div id="quiz-result" class="text-center hidden animate-fade-in">
+        <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 xs:mb-3 sm:mb-4 md:mb-6 animate-bounce-gentle">💖</div>
+        <h3 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-script text-purple-600 mb-2 xs:mb-3 sm:mb-4">Perfect Score!</h3>
+        <p class="text-sm xs:text-base sm:text-lg md:text-xl text-teal-700 leading-relaxed px-1 xs:px-2">
+          You know my heart better than I know it myself. Every answer reveals how deeply connected our souls are. You are not just my love, you are my heart walking outside my body.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  const quizData = [
+    {
+      question: "What is my favorite nickname for you?",
+      options: ["Honeybun", "Pumpkin", "Sweetheart", "Babyboo"],
+      correct: 0,
+    },
+    {
+      question: "What’s our favorite movie together?",
+      options: ["The Notebook", "La La Land", "Your Name", "Titanic"],
+      correct: 2,
+    },
+    {
+      question: "Which month did we first meet?",
+      options: ["January", "March", "July", "December"],
+      correct: 1,
+    },
+    {
+      question: "What’s your go-to comfort food I always make for you?",
+      options: ["Pasta", "Paneer Butter Masala", "Maggie", "Pizza"],
+      correct: 2,
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  function showQuestion(index) {
+    const container = document.getElementById("quiz-container");
+    if (!container) return;
+
+    const q = quizData[index];
+    container.innerHTML = `
+      <div class="p-6 rounded-xl shadow-md border border-pink-100 max-w-xl mx-auto animate-scale-in bg-gradient-to-br from-purple-900 via-pink-800 to-purple-900 text-white">
+        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-center">${q.question}</h3>
+        <div class="grid gap-4">
+          ${q.options.map((option, i) => `
+            <button
+              class="option-btn py-2 px-4 rounded-lg border border-purple-200 bg-pink-50 text-purple-800 hover:bg-purple-100 transition w-full"
+              data-index="${i}"
+            >
+              ${option}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+
+    container.querySelectorAll(".option-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        checkAnswer(parseInt(btn.dataset.index));
+      });
+    });
+  }
+
+  function checkAnswer(selected) {
+    const correct = quizData[currentQuestion].correct;
+    if (selected === correct) score++;
+
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      showQuestion(currentQuestion);
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    const result = document.getElementById("quiz-result");
+    const container = document.getElementById("quiz-container");
+
+    if (!result || !container) return;
+
+    container.classList.add("hidden");
+    result.classList.remove("hidden");
+    result.innerHTML = `
+      <div class="text-5xl mb-4 animate-bounce-gentle">💖</div>
+      <h3 class="text-xl sm:text-2xl font-script text-purple-600 mb-3">Quiz Completed!</h3>
+      <p class="text-teal-700 font-semibold">You scored ${score} out of ${quizData.length}</p>
+      <p class="text-sm text-purple-500 mt-2 italic">You know my heart better than I know it myself.</p>
+    `;
+  }
+
+  // Auto-run after DOM is ready (even in dynamic load)
+  setTimeout(() => {
+    const container = document.getElementById("quiz-container");
+    if (container) showQuestion(currentQuestion);
+  }, 0);
+})();
+</script>
+
+</body>
+</html>

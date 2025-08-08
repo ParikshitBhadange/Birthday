@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Letter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>      
+<body>
+    
+  <section id="letter" class="min-h-screen flex items-center justify-center py-8 xs:py-12 sm:py-16 md:py-20 px-1 xs:px-2 sm:px-4">
+        <div class="w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl mx-auto">
+            <div class="bg-white/90 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 xl:p-12 border xs:border-2 sm:border-4 border-purple-200 relative animate-scale-in">
+                <div class="absolute -top-2 xs:-top-3 sm:-top-4 md:-top-6 left-1/2 transform -translate-x-1/2 bg-pink-500 rounded-full p-1 xs:p-2 sm:p-3 md:p-4 animate-bounce-gentle text-xs xs:text-sm sm:text-base">💕</div>
+                <div class="absolute top-1 xs:top-2 sm:top-4 right-1 xs:right-2 sm:right-4 text-purple-300 text-lg xs:text-xl sm:text-2xl md:text-4xl lg:text-6xl opacity-20 animate-spin-slow">🌺</div>
+                <div class="absolute bottom-1 xs:bottom-2 sm:bottom-4 left-1 xs:left-2 sm:left-4 text-purple-300 text-lg xs:text-xl sm:text-2xl md:text-4xl lg:text-6xl opacity-20 animate-spin-slow-reverse">🌺</div>
+
+                <h2 class="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-script text-center text-purple-600 mb-3 xs:mb-4 sm:mb-6 md:mb-8 animate-fade-in">
+                    A Letter From My Heart
+                </h2>
+                <div id="typewriter-text" class="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl text-teal-700 leading-relaxed font-serif min-h-[200px] xs:min-h-[250px] sm:min-h-[300px] md:min-h-[400px]">
+                    <span id="cursor" class="animate-pulse">|</span>
+                </div>
+                <div class="text-right mt-3 xs:mt-4 sm:mt-6 md:mt-8 animate-fade-in-delay">
+                    <p class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl font-script text-purple-600">Forever yours,</p>
+                    <p class="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-script text-pink-500">Your Devoted Love 💕</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+  const loveLetterText =
+    "My dearest darling, like the plumeria that blooms in paradise, you have brought beauty and fragrance to every corner of my world. Your smile is the sunshine that makes my garden of love flourish, and your laughter is the gentle breeze that carries the sweet scent of our memories. On this special day, I want you to know that you are not just another year older, but another year more precious to my heart. Every petal that falls reminds me of the moments we've shared, and every bloom that opens whispers of the beautiful future we'll create together. Happy Birthday, my love. You are my forever spring.";
+
+  let typewriterInterval;
+  let isTypewriterActive = false;
+
+  function startTypewriter() {
+    if (isTypewriterActive) return;
+
+    const textElement = document.getElementById("typewriter-text");
+    if (!textElement) return;
+
+    let i = 0;
+    isTypewriterActive = true;
+    textElement.innerHTML = '<span id="cursor" class="animate-pulse">|</span>';
+
+    const speed = window.innerWidth < 375 ? 20 : window.innerWidth < 768 ? 30 : 50;
+
+    typewriterInterval = setInterval(() => {
+      if (i < loveLetterText.length) {
+        textElement.innerHTML =
+          loveLetterText.slice(0, i + 1) + '<span id="cursor" class="animate-pulse">|</span>';
+        i++;
+      } else {
+        clearInterval(typewriterInterval);
+      }
+    }, speed);
+  }
+
+  window.triggerLetter = function () {
+    const section = document.getElementById("letter");
+    const textElement = document.getElementById("typewriter-text");
+
+    if (section) {
+      // Scroll immediately
+      const offset = window.innerWidth < 768 ? 60 : 80;
+      const top = section.offsetTop - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Close mobile menu if open
+      if (window.innerWidth < 1024 && typeof toggleMobileMenu === "function") {
+        toggleMobileMenu(false);
+      }
+
+      // Start typewriter right away if target is available
+      if (textElement && !isTypewriterActive) {
+        startTypewriter();
+      } else {
+        // Try again every 100ms for 2s max
+        let attempts = 0;
+        const interval = setInterval(() => {
+          const retryTarget = document.getElementById("typewriter-text");
+          if (retryTarget && !isTypewriterActive) {
+            startTypewriter();
+            clearInterval(interval);
+          }
+          if (++attempts > 20) clearInterval(interval);
+        }, 100);
+      }
+    }
+  };
+</script>
+
+
+
+
+    
+</body>
+</html>

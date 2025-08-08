@@ -1,0 +1,664 @@
+/* Custom Tailwind breakpoints for extreme mobile */
+@media (max-width: 374px) {
+  .xs\:text-sm {
+    font-size: 0.875rem;
+  }
+  .xs\:text-base {
+    font-size: 1rem;
+  }
+  .xs\:text-lg {
+    font-size: 1.125rem;
+  }
+  .xs\:text-xl {
+    font-size: 1.25rem;
+  }
+  .xs\:text-2xl {
+    font-size: 1.5rem;
+  }
+  .xs\:text-3xl {
+    font-size: 1.875rem;
+  }
+  .xs\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .xs\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .xs\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .xs\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .xs\:py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  .xs\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  .xs\:mb-3 {
+    margin-bottom: 0.75rem;
+  }
+  .xs\:mb-4 {
+    margin-bottom: 1rem;
+  }
+  .xs\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  .xs\:w-24 {
+    width: 6rem;
+  }
+  .xs\:h-8 {
+    height: 2rem;
+  }
+  .xs\:w-8 {
+    width: 2rem;
+  }
+  .xs\:w-6 {
+    width: 1.5rem;
+  }
+  .xs\:space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  .xs\:gap-3 {
+    gap: 0.75rem;
+  }
+  .xs\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .xs\:max-w-sm {
+    max-width: 24rem;
+  }
+  .xs\:pt-16 {
+    padding-top: 4rem;
+  }
+  .xs\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .xs\:rounded-xl {
+    border-radius: 0.75rem;
+  }
+  .xs\:border-2 {
+    border-width: 2px;
+  }
+  .xs\:-top-3 {
+    top: -0.75rem;
+  }
+  .xs\:right-2 {
+    right: 0.5rem;
+  }
+  .xs\:left-2 {
+    left: 0.5rem;
+  }
+  .xs\:bottom-2 {
+    bottom: 0.5rem;
+  }
+  .xs\:top-2 {
+    top: 0.5rem;
+  }
+  .xs\:bottom-4 {
+    bottom: 1rem;
+  }
+  .xs\:right-4 {
+    right: 1rem;
+  }
+  .xs\:w-5 {
+    width: 1.25rem;
+  }
+  .xs\:h-5 {
+    height: 1.25rem;
+  }
+}
+
+.font-script {
+  font-family: "Dancing Script", cursive;
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif;
+}
+
+/* Enhanced Mobile-First Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+@keyframes float-mobile {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(0.7);
+  }
+  50% {
+    transform: translateY(-8px) rotate(180deg) scale(0.7);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (max-width: 374px) {
+  .animate-float {
+    animation: float-mobile 5s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .animate-float {
+    animation: float-mobile 4s ease-in-out infinite;
+  }
+}
+
+@keyframes bounce-confetti {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg);
+  }
+}
+
+@keyframes bounce-confetti-mobile {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(0.6);
+  }
+  50% {
+    transform: translateY(-15px) rotate(180deg) scale(0.6);
+  }
+}
+
+.animate-bounce-confetti {
+  animation: bounce-confetti 2s ease-in-out infinite;
+}
+
+@media (max-width: 374px) {
+  .animate-bounce-confetti {
+    animation: bounce-confetti-mobile 1.2s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .animate-bounce-confetti {
+    animation: bounce-confetti-mobile 1.5s ease-in-out infinite;
+  }
+}
+
+/* New Mobile-Friendly Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delay {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* Apply animations */
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+.animate-fade-in-delay {
+  animation: fade-in-delay 1.5s ease-out 0.5s both;
+}
+.animate-slide-up {
+  animation: slide-up 1s ease-out;
+}
+.animate-slide-down {
+  animation: slide-down 1s ease-out;
+}
+.animate-scale-in {
+  animation: scale-in 0.8s ease-out;
+}
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 25s linear infinite;
+}
+
+/* Hamburger Menu Animations */
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(3px, 3px);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -3px);
+}
+
+/* Mobile Menu Animation */
+.mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
+}
+.mobile-menu-open {
+  transform: translateY(0);
+  display: flex !important;
+
+}
+
+/* Navigation Active States */
+.nav-btn.active {
+  color: #9333ea;
+  border-bottom: 2px solid #9333ea;
+}
+
+.mobile-nav-btn.active {
+  background-color: #f3e8ff;
+  color: #9333ea;
+  border-left: 4px solid #9333ea;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - Mobile friendly */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #9333ea, #ec4899);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #7c3aed, #db2777);
+}
+
+/* Extreme Mobile Optimizations */
+@media (max-width: 374px) {
+  /* Ensure minimum touch targets */
+  button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+
+  /* Reduce spacing for very small screens */
+  .space-y-3 > * + * {
+    margin-top: 0.5rem;
+  }
+
+  /* Better line height for readability */
+  p,
+  div {
+    line-height: 1.5;
+  }
+
+  /* Reduce shadow intensity */
+  .shadow-lg {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-2xl {
+    box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Optimize font sizes for tiny screens */
+  .font-script {
+    line-height: 1.1;
+  }
+
+  /* Reduce animation intensity */
+  .animate-float {
+    animation-duration: 6s;
+  }
+
+  /* Better spacing */
+  .leading-tight {
+    line-height: 1.1;
+  }
+
+  .leading-relaxed {
+    line-height: 1.4;
+  }
+}
+
+/* Mobile Touch Improvements */
+@media (max-width: 1024px) {
+  /* Larger touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .space-y-3 > * + * {
+    margin-top: 1rem;
+  }
+
+  /* Improved readability */
+  p,
+  div {
+    line-height: 1.6;
+  }
+}
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  box-sizing: border-box;
+}
+
+.container,
+section,
+div {
+  max-width: 100%;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Reduce animation intensity on mobile for better performance */
+  .animate-float {
+    animation-duration: 8s;
+  }
+
+  /* Better mobile typography */
+  .font-script {
+    line-height: 1.2;
+  }
+
+  /* Mobile-friendly shadows */
+  .shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-xl {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-2xl {
+    box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states for better accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid #9333ea;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-white\/90 {
+    background-color: white;
+  }
+
+  .text-teal-700 {
+    color: #000;
+  }
+
+  .text-purple-600 {
+    color: #4c1d95;
+  }
+}
+
+/* Loading animation for images */
+img {
+  transition: opacity 0.3s ease;
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Touch indicator pulse */
+#touch-indicator {
+  animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+/* Mobile quiz improvements */
+@media (max-width: 768px) {
+  .quiz-radio {
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  label {
+    padding: 8px 4px;
+  }
+}
+
+@media (max-width: 374px) {
+  .quiz-radio {
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  label {
+    padding: 6px 2px;
+  }
+}
+
+/* Performance optimizations */
+.backdrop-blur-sm,
+.backdrop-blur-md {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Ensure proper stacking context */
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-40 {
+  z-index: 40;
+}
+.z-50 {
+  z-index: 50;
+}
+
+/* Fix for very narrow viewports */
+@media (max-width: 280px) {
+  .text-2xl {
+    font-size: 1.25rem;
+  }
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  .text-4xl {
+    font-size: 1.875rem;
+  }
+  .px-3 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .py-3 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .mb-4 {
+    margin-bottom: 0.75rem;
+  }
+  .mb-6 {
+    margin-bottom: 1rem;
+  }
+  .mb-8 {
+    margin-bottom: 1.5rem;
+  }
+  .space-y-4 > * + * {
+    margin-top: 0.75rem;
+  }
+  .gap-4 {
+    gap: 0.5rem;
+  }
+  .rounded-2xl {
+    border-radius: 0.75rem;
+  }
+  .p-4 {
+    padding: 0.75rem;
+  }
+  .p-6 {
+    padding: 1rem;
+  }
+  .w-48 {
+    width: 10rem;
+  }
+  .min-h-\[400px\] {
+    min-height: 250px;
+  }
+  .min-h-\[300px\] {
+    min-height: 200px;
+  }
+}

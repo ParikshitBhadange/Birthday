@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Darling - Plumeria Garden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  <style>
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease;
+    }
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s ease;
+    }
+    .show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-pink-50 to-pink-100 text-gray-800 font-sans">
+
+ <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-50">
+  <div class="w-full px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+  <img src="Plumeria.webp" alt="Plumeria Logo" class="h-full max-h-16 object-contain" style="margin: 2px 2px 2px 0;">
+  <span class="block text-teal-700 font-script" style="margin-left: 2px; font-size: 30px;">
+Plumeria  </span>
+</div>
+    <a href="index.html" class="px-14 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg text-sm sm:text-base transition">
+      ← Back to Home
+    </a>
+  </div>
+</nav>
+  <!-- Timeline Section -->
+  <section id="timeline" class="min-h-screen py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto text-center mb-12">
+      <h2 class="text-3xl xs:text-4xl sm:text-5xl font-bold text-pink-600 mb-4">Our Journey</h2>
+      <p class="text-base sm:text-lg text-gray-600">Moments that shaped our love story</p>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Vertical Line -->
+      <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 h-full border-l-4 border-pink-300"></div>
+
+      <!-- Timeline Item 1 -->
+      <div class="mb-12 flex flex-col sm:flex-row items-start sm:items-center relative">
+        <div class="absolute left-0 sm:left-1/2 transform sm:-translate-x-1/2 bg-pink-500 rounded-full w-6 h-6 border-4 border-white shadow-lg"></div>
+        <div class="sm:w-1/2 sm:pr-8 sm:text-right slide-in-left">
+          <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6">
+            <time class="text-sm text-gray-500 block mb-1">January 2023</time>
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-700">Our First Meeting</h3>
+            <p class="text-gray-600 mt-2">We met under twinkling lights, and everything felt magical from the first hello.</p>
+          </div>
+        </div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+      </div>
+
+      <!-- Timeline Item 2 -->
+      <div class="mb-12 flex flex-col sm:flex-row items-start sm:items-center relative">
+        <div class="absolute left-0 sm:left-1/2 transform sm:-translate-x-1/2 bg-pink-500 rounded-full w-6 h-6 border-4 border-white shadow-lg"></div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+        <div class="sm:w-1/2 sm:pl-8 slide-in-right">
+          <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6">
+            <time class="text-sm text-gray-500 block mb-1">March 2023</time>
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-700">First Adventure</h3>
+            <p class="text-gray-600 mt-2">We explored new places and filled our days with laughter and shared dreams.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 3 -->
+      <div class="mb-12 flex flex-col sm:flex-row items-start sm:items-center relative">
+        <div class="absolute left-0 sm:left-1/2 transform sm:-translate-x-1/2 bg-pink-500 rounded-full w-6 h-6 border-4 border-white shadow-lg"></div>
+        <div class="sm:w-1/2 sm:pr-8 sm:text-right slide-in-left">
+          <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6">
+            <time class="text-sm text-gray-500 block mb-1">June 2023</time>
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-700">Our First Anniversary</h3>
+            <p class="text-gray-600 mt-2">A day of cake, happy tears, and remembering how far we’ve come.</p>
+          </div>
+        </div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+      </div>
+
+      <!-- Timeline Item 4 -->
+      <div class="mb-12 flex flex-col sm:flex-row items-start sm:items-center relative">
+        <div class="absolute left-0 sm:left-1/2 transform sm:-translate-x-1/2 bg-pink-500 rounded-full w-6 h-6 border-4 border-white shadow-lg"></div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+        <div class="sm:w-1/2 sm:pl-8 slide-in-right">
+          <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6">
+            <time class="text-sm text-gray-500 block mb-1">August 2023</time>
+            <h3 class="text-lg sm:text-xl font-semibold text-pink-700">Dream Trip</h3>
+            <p class="text-gray-600 mt-2">We traveled to our dream destination and made memories to last a lifetime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-running Animation Script -->
+  <script>
+    (function initTimelineAnimation() {
+      const container = document.getElementById("timeline");
+      if (!container) return;
+
+      const itemsLeft = container.querySelectorAll(".slide-in-left");
+      const itemsRight = container.querySelectorAll(".slide-in-right");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, { threshold: 0.2 });
+
+      itemsLeft.forEach(item => observer.observe(item));
+      itemsRight.forEach(item => observer.observe(item));
+    })();
+  </script>
+
+</body>
+</html>

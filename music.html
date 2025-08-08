@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Darling - Plumeria Garden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+   <section id="music" class="min-h-screen py-8 xs:py-12 sm:py-16 md:py-20 px-1 xs:px-2 sm:px-4 bg-gradient-to-br from-purple-50 to-pink-50">
+  <div class="w-full max-w-xs xs:max-w-sm sm:max-w-4xl md:max-w-6xl mx-auto">
+    <h2 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-script text-center text-purple-600 mb-1 xs:mb-2 sm:mb-4 animate-slide-down">
+      Songs That Remind Me of You
+    </h2>
+    <p class="text-sm xs:text-base sm:text-lg md:text-xl text-center text-teal-600 mb-4 xs:mb-6 sm:mb-8 md:mb-12 px-1 xs:px-2 sm:px-4 animate-fade-in-delay">Each melody carries our love story</p>
+
+    <div class="space-y-6" id="songs-container"></div>
+
+    <!-- Music Control Bar -->
+    <div id="music-controls" class="hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-inner px-4 py-3 flex items-center justify-between z-40">
+      <button id="prev-btn" class="text-purple-600 text-lg">⏮️</button>
+      <button id="play-pause-btn" class="text-purple-600 text-xl">⏸️</button>
+      <button id="next-btn" class="text-purple-600 text-lg">⏭️</button>
+      <div class="flex-1 mx-4">
+        <input id="seek-bar" type="range" value="0" class="w-full">
+      </div>
+      <span id="current-song" class="text-sm text-teal-700 truncate w-48 text-right"></span>
+    </div>
+
+    <audio id="audio-player" src="" class="hidden"></audio>
+  </div>
+</section>
+
+<script>
+  const songs = [
+    {
+      id: "perfect",
+      title: "Perfect",
+      artist: "Ed Sheeran",
+      subtitle: "Our first dance song",
+      file: "/songs/perfect.mp3",
+    },
+    {
+      id: "allofme",
+      title: "All of Me",
+      artist: "John Legend",
+      subtitle: "You love all of me",
+      file: "/songs/all_of_me.mp3",
+    },
+    {
+      id: "thinking",
+      title: "Thinking Out Loud",
+      artist: "Ed Sheeran",
+      subtitle: "Growing old together",
+      file: "/songs/thinking_out_loud.mp3",
+    },
+    {
+      id: "thousand",
+      title: "A Thousand Years",
+      artist: "Christina Perri",
+      subtitle: "I'll love you forever",
+      file: "/songs/a_thousand_years.mp3",
+    },
+  ];
+
+  const songsContainer = document.getElementById("songs-container");
+  const audioPlayer = document.getElementById("audio-player");
+  const musicControls = document.getElementById("music-controls");
+  const currentSongTitle = document.getElementById("current-song");
+  const playPauseBtn = document.getElementById("play-pause-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const prevBtn = document.getElementById("prev-btn");
+  const seekBar = document.getElementById("seek-bar");
+
+  let currentIndex = 0;
+  let isPlaying = false;
+
+  // Create card UI for each song
+  songs.forEach((song, index) => {
+    const card = document.createElement("div");
+    card.className =
+      "flex items-center justify-between space-x-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 cursor-pointer";
+
+    card.innerHTML = `
+      <div class="flex items-center space-x-4">
+        <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 3v10.55a4 4 0 1 0 2-3.45V3h-2z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-lg font-bold text-purple-800">${song.title}</p>
+          <p class="text-sm text-teal-700">${song.artist}</p>
+          <p class="text-xs italic text-pink-600">${song.subtitle}</p>
+        </div>
+      </div>
+      <div>
+        <svg class="w-6 h-6 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M3.172 5.172a4 4 0 0 1 5.656 0L10 6.343l1.172-1.171a4 4 0 1 1 5.656 5.656L10 18.657l-6.828-6.829a4 4 0 0 1 0-5.656z"/>
+        </svg>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      loadSong(index);
+      playSong();
+    });
+
+    songsContainer.appendChild(card);
+  });
+
+  // Functions to handle audio
+  function loadSong(index) {
+    const song = songs[index];
+    if (!song) return;
+    audioPlayer.src = song.file;
+    currentSongTitle.textContent = `${song.title} - ${song.artist}`;
+    currentIndex = index;
+    musicControls.classList.remove("hidden");
+  }
+
+  function playSong() {
+    audioPlayer.play();
+    isPlaying = true;
+    playPauseBtn.textContent = "⏸️";
+  }
+
+  function pauseSong() {
+    audioPlayer.pause();
+    isPlaying = false;
+    playPauseBtn.textContent = "▶️";
+  }
+
+  playPauseBtn.addEventListener("click", () => {
+    isPlaying ? pauseSong() : playSong();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % songs.length;
+    loadSong(currentIndex);
+    playSong();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+    loadSong(currentIndex);
+    playSong();
+  });
+
+  audioPlayer.addEventListener("timeupdate", () => {
+    if (audioPlayer.duration) {
+      seekBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    }
+  });
+
+  seekBar.addEventListener("input", () => {
+    if (audioPlayer.duration) {
+      audioPlayer.currentTime = (seekBar.value / 100) * audioPlayer.duration;
+    }
+  });
+
+  audioPlayer.addEventListener("ended", () => {
+    nextBtn.click();
+  });
+</script>
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
