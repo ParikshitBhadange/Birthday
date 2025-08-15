@@ -31,6 +31,9 @@
       from { transform: scale(0.9); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-in;
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen flex items-center justify-center px-4">
@@ -45,11 +48,17 @@
     <div class="bg-white/90 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 border xs:border-2 border-purple-200 animate-scale-in">
       <div id="quiz-container"></div>
       <div id="quiz-result" class="text-center hidden animate-fade-in">
-        <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 xs:mb-3 sm:mb-4 md:mb-6 animate-bounce-gentle">💖</div>
-        <h3 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-script text-purple-600 mb-2 xs:mb-3 sm:mb-4">Perfect Score!</h3>
-        <p class="text-sm xs:text-base sm:text-lg md:text-xl text-teal-700 leading-relaxed px-1 xs:px-2">
-          You know my heart better than I know it myself. Every answer reveals how deeply connected our souls are. You are not just my love, you are my heart walking outside my body.
-        </p>
+        <!-- Results will be populated by JavaScript -->
+      </div>
+      
+      <!-- Progress indicator -->
+      <div id="progress-indicator" class="mt-4 text-center">
+        <div class="flex justify-center space-x-2">
+          <div class="progress-dot w-3 h-3 rounded-full bg-purple-300"></div>
+          <div class="progress-dot w-3 h-3 rounded-full bg-purple-300"></div>
+          <div class="progress-dot w-3 h-3 rounded-full bg-purple-300"></div>
+          <div class="progress-dot w-3 h-3 rounded-full bg-purple-300"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -60,43 +69,63 @@
   const quizData = [
     {
       question: "What is my favorite nickname for you?",
-      options: ["Honeybun", "Pumpkin", "Sweetheart", "Babyboo"],
-      correct: 0,
+      options: ["Anuuu....", "Anuuu...", "Anuuu.....", "anuuu..."],
+      correct: "any", // Any option is correct
     },
     {
-      question: "What’s our favorite movie together?",
-      options: ["The Notebook", "La La Land", "Your Name", "Titanic"],
-      correct: 2,
+      question: "Anuuu..'s favorite food?",
+      options: ["Maggie", "Street Food", "Homemade", "Kali pan chalte"],
+      correct: 1, // Street Food is correct
     },
     {
-      question: "Which month did we first meet?",
-      options: ["January", "March", "July", "December"],
-      correct: 1,
+      question: "Which month did we Reconnect?",
+      options: ["January", "April", "July", "August"],
+      correct: 0, // January is correct
     },
     {
-      question: "What’s your go-to comfort food I always make for you?",
-      options: ["Pasta", "Paneer Butter Masala", "Maggie", "Pizza"],
-      correct: 2,
+      question: "What's your go-to comfort food I always make for you?",
+      options: ["Any streetfood ", "Let's go outside instead", "Anything that you want", "Anything that I make"],
+      correct: "any", // Any option is correct
     }
   ];
 
   let currentQuestion = 0;
   let score = 0;
+  let userAnswers = [];
+
+  function updateProgress() {
+    const dots = document.querySelectorAll('.progress-dot');
+    dots.forEach((dot, index) => {
+      if (index < currentQuestion) {
+        dot.classList.remove('bg-purple-300');
+        dot.classList.add('bg-purple-600');
+      } else if (index === currentQuestion) {
+        dot.classList.remove('bg-purple-300', 'bg-purple-600');
+        dot.classList.add('bg-pink-500', 'animate-pulse');
+      }
+    });
+  }
 
   function showQuestion(index) {
     const container = document.getElementById("quiz-container");
-    if (!container) return;
+    if (!container || !quizData[index]) return;
+
+    updateProgress();
 
     const q = quizData[index];
     container.innerHTML = `
-      <div class="p-6 rounded-xl shadow-md border border-pink-100 max-w-xl mx-auto animate-scale-in bg-gradient-to-br from-purple-900 via-pink-800 to-purple-900 text-white">
-        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-center">${q.question}</h3>
-        <div class="grid gap-4">
+      <div class="p-4 xs:p-6 rounded-xl shadow-md border border-pink-100 max-w-xl mx-auto animate-scale-in bg-gradient-to-br from-purple-900 via-pink-800 to-purple-900 text-white">
+        <div class="text-center mb-4">
+          <span class="text-sm xs:text-base text-purple-200">Question ${index + 1} of ${quizData.length}</span>
+        </div>
+        <h3 class="text-base xs:text-lg sm:text-xl md:text-2xl font-semibold mb-4 xs:mb-6 text-center leading-relaxed">${q.question}</h3>
+        <div class="grid gap-3 xs:gap-4">
           ${q.options.map((option, i) => `
             <button
-              class="option-btn py-2 px-4 rounded-lg border border-purple-200 bg-pink-50 text-purple-800 hover:bg-purple-100 transition w-full"
+              class="option-btn py-3 xs:py-4 px-4 xs:px-6 rounded-lg border border-purple-200 bg-pink-50 text-purple-800 hover:bg-purple-100 hover:border-purple-400 transition-all duration-300 w-full text-left font-medium transform hover:scale-105"
               data-index="${i}"
             >
+              <span class="inline-block w-6 h-6 xs:w-8 xs:h-8 rounded-full bg-purple-200 text-center leading-6 xs:leading-8 mr-3 xs:mr-4 text-xs xs:text-sm font-bold">${String.fromCharCode(65 + i)}</span>
               ${option}
             </button>
           `).join("")}
@@ -104,46 +133,146 @@
       </div>
     `;
 
-    container.querySelectorAll(".option-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        checkAnswer(parseInt(btn.dataset.index));
+    // Add event listeners to option buttons
+    const optionButtons = container.querySelectorAll(".option-btn");
+    optionButtons.forEach(btn => {
+      btn.addEventListener("click", function() {
+        // Disable all buttons to prevent multiple clicks
+        optionButtons.forEach(b => {
+          b.disabled = true;
+          b.classList.add('opacity-50', 'cursor-not-allowed');
+        });
+        
+        // Highlight selected answer
+        this.classList.add("bg-purple-200", "border-purple-600", "scale-105");
+        
+        const selectedIndex = parseInt(this.dataset.index);
+        userAnswers[currentQuestion] = selectedIndex;
+        
+        // Show feedback briefly
+        setTimeout(() => {
+          checkAnswer(selectedIndex);
+        }, 800);
       });
     });
   }
 
   function checkAnswer(selected) {
     const correct = quizData[currentQuestion].correct;
-    if (selected === correct) score++;
+    
+    // Check if answer is correct
+    if (correct === "any" || selected === correct) {
+      score++;
+    }
 
     currentQuestion++;
+    
     if (currentQuestion < quizData.length) {
-      showQuestion(currentQuestion);
+      // Move to next question
+      setTimeout(() => {
+        showQuestion(currentQuestion);
+      }, 400);
     } else {
-      showResult();
+      // Show results
+      setTimeout(() => {
+        showResult();
+      }, 400);
     }
   }
 
   function showResult() {
     const result = document.getElementById("quiz-result");
     const container = document.getElementById("quiz-container");
+    const progressIndicator = document.getElementById("progress-indicator");
 
     if (!result || !container) return;
 
+    // Hide quiz container and progress indicator
     container.classList.add("hidden");
+    if (progressIndicator) progressIndicator.classList.add("hidden");
+    
+    // Show result
     result.classList.remove("hidden");
+
+    // Calculate percentage
+    const percentage = Math.round((score / quizData.length) * 100);
+    
+    // Determine result message based on score
+    let resultMessage = "";
+    let resultEmoji = "💖";
+    
+    if (score === quizData.length) {
+      resultMessage = "You know my heart better than I know it myself. Every answer reveals how deeply connected our souls are. You are not just my love, you are my heart walking outside my body.";
+      resultEmoji = "💖✨";
+    } else if (score >= Math.ceil(quizData.length * 0.75)) {
+      resultMessage = "Your love speaks the language of my heart. You understand me in ways that make my soul feel seen and cherished.";
+      resultEmoji = "💕🌟";
+    } else if (score >= Math.ceil(quizData.length * 0.5)) {
+      resultMessage = "You know me well, my love. There are still beautiful mysteries for us to discover together.";
+      resultEmoji = "💝🌸";
+    } else {
+      resultMessage = "Every day with you is a chance to know each other deeper. Our love story is still being written.";
+      resultEmoji = "🌈💫";
+    }
+
     result.innerHTML = `
-      <div class="text-5xl mb-4 animate-bounce-gentle">💖</div>
-      <h3 class="text-xl sm:text-2xl font-script text-purple-600 mb-3">Quiz Completed!</h3>
-      <p class="text-teal-700 font-semibold">You scored ${score} out of ${quizData.length}</p>
-      <p class="text-sm text-purple-500 mt-2 italic">You know my heart better than I know it myself.</p>
+      <div class="text-4xl xs:text-5xl mb-4 xs:mb-6 animate-bounce-gentle">${resultEmoji}</div>
+      <h3 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-script text-purple-600 mb-3 xs:mb-4">Quiz Completed!</h3>
+      <div class="mb-4 xs:mb-6">
+        <div class="text-2xl xs:text-3xl sm:text-4xl font-bold text-purple-700 mb-2">${score}/${quizData.length}</div>
+        <div class="text-base xs:text-lg text-teal-600 font-semibold">${percentage}% Score</div>
+      </div>
+      <p class="text-sm xs:text-base sm:text-lg text-teal-700 leading-relaxed px-1 xs:px-2 mb-6 italic">${resultMessage}</p>
+      <button 
+        onclick="restartQuiz()" 
+        class="py-2 xs:py-3 px-4 xs:px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+      >
+        Take Quiz Again 🔄
+      </button>
     `;
   }
 
-  // Auto-run after DOM is ready (even in dynamic load)
-  setTimeout(() => {
+  function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    userAnswers = [];
+    
+    const result = document.getElementById("quiz-result");
     const container = document.getElementById("quiz-container");
-    if (container) showQuestion(currentQuestion);
-  }, 0);
+    const progressIndicator = document.getElementById("progress-indicator");
+    
+    result.classList.add("hidden");
+    container.classList.remove("hidden");
+    if (progressIndicator) progressIndicator.classList.remove("hidden");
+    
+    // Reset progress dots
+    const dots = document.querySelectorAll('.progress-dot');
+    dots.forEach(dot => {
+      dot.classList.remove('bg-purple-600', 'bg-pink-500', 'animate-pulse');
+      dot.classList.add('bg-purple-300');
+    });
+    
+    showQuestion(currentQuestion);
+  }
+
+  // Make restartQuiz available globally
+  window.restartQuiz = restartQuiz;
+
+  // Initialize quiz when DOM is ready
+  function initQuiz() {
+    const container = document.getElementById("quiz-container");
+    if (container) {
+      showQuestion(currentQuestion);
+    }
+  }
+
+  // Start quiz when page loads
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initQuiz);
+  } else {
+    initQuiz();
+  }
+
 })();
 </script>
 

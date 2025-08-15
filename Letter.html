@@ -32,8 +32,15 @@
     </section>
 
 <script>
-  const loveLetterText =
-    "My dearest darling, like the plumeria that blooms in paradise, you have brought beauty and fragrance to every corner of my world. Your smile is the sunshine that makes my garden of love flourish, and your laughter is the gentle breeze that carries the sweet scent of our memories. On this special day, I want you to know that you are not just another year older, but another year more precious to my heart. Every petal that falls reminds me of the moments we've shared, and every bloom that opens whispers of the beautiful future we'll create together. Happy Birthday, my love. You are my forever spring.";
+  const loveLetterText = `My Dearest Love,
+
+Happy Birthday to the most incredible person who has ever walked into my life. Four months ago, you made a choice that changed everything—you chose me over everyone else, chose love over distance, chose us over convenience. In a world where you could have anyone, where every guy at your college dreams of being with you, where even professors know your name and your brilliance, you decided that what we have is worth every tear, every lonely night, every sacrifice. That decision, my darling, is the most romantic thing anyone has ever done for me.
+
+I know this journey isn't easy for you. I see it in your eyes during our video calls sometimes—that hidden sadness when you watch couples around campus doing all the things we dream about. I know you cry alone in your hostel room, thinking about us, about the miles between us, about how unfair it sometimes feels. But sweetheart, don't hide those tears from me. Your pain is my pain, your struggles are mine to share. You are incredibly strong, but you don't have to carry everything alone.
+
+Every single day I wake up amazed by your courage, by the way you choose us again and again despite having easier options right there in front of you. You could walk out of your hostel and find someone who can hold your hand immediately, someone who can take you on dates without a screen between you. But instead, you choose to wait for me, to build something real and deep with me. That kind of love, that kind of commitment—it's extraordinary, and it makes me fall in love with you more every day.
+
+The day we finally close this distance will be the most magical day of our lives, but until then, I want you to know that I am with you in every moment. When you laugh, I'm celebrating with you. When you cry, I'm holding you in my heart. When you feel lonely, remember that somewhere I'm thinking of you, dreaming of you, loving you with everything I have. You are not just my girlfriend—you are my heart walking around in another city, and no distance will ever change how deeply, completely, and eternally I love you. Happy Birthday, my beautiful girl.`;
 
   let typewriterInterval;
   let isTypewriterActive = false;
@@ -52,8 +59,10 @@
 
     typewriterInterval = setInterval(() => {
       if (i < loveLetterText.length) {
-        textElement.innerHTML =
-          loveLetterText.slice(0, i + 1) + '<span id="cursor" class="animate-pulse">|</span>';
+        let currentText = loveLetterText.slice(0, i + 1);
+        // Convert line breaks to HTML breaks for proper paragraph display
+        currentText = currentText.replace(/\n/g, '<br>');
+        textElement.innerHTML = currentText + '<span id="cursor" class="animate-pulse">|</span>';
         i++;
       } else {
         clearInterval(typewriterInterval);
@@ -94,10 +103,6 @@
     }
   };
 </script>
-
-
-
-
-    
+ 
 </body>
 </html>
